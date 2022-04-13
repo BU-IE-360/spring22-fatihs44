@@ -1,0 +1,49 @@
+
+library(xlsx)
+require(ggplot2)
+require(ggcorrplot)
+require(GGally)
+require(data.table)
+library(lubridate)
+
+data_link=file.choose()
+all_data=read.xlsx(data_link,sheetIndex = 1)
+all_data=data.table(all_data)
+all_data[,DATE:=ym(DATE)]
+
+
+ggplot_1=ggplot(all_data,aes(x=DATE))+geom_line(aes(y=EXPORT_BILLION,color="Export"))+
+  geom_line(aes(y=EXC_RATE,color="USD/TRY"))
+ggplot_1
+
+ggplot_2=ggplot(all_data,aes(x=DATE))+geom_line(aes(y=IMPORT_BILLION,color="Import"))+
+  geom_line(aes(y=EXC_RATE,color="USD/TRY"))
+ggplot_2
+#PPI is in normalized form due to visualization purposes
+ggplot3=ggplot(all_data,aes(x=DATE))+geom_line(aes(y=PPI,color="PPI"))+
+  geom_line(aes(y=EXC_RATE,color="USD/TRY"))
+ggplot3
+
+
+ggpairs(all_data)
+
+
+acf(all_data$EXC_RATE)
+
+data_path=file.choose()
+search_enflasyon=read.csv(data_path)
+search_enflasyon=data.table(search_enflasyon)
+search_enflasyon[,Ay:=ym(Ay)]
+
+plot(all_data$DATE, all_data$EXC_RATE, type = "l",xlab = " ", ylab = " ", main = "USD/TRY Exchange Rates")
+plot(search_enflasyon$Ay,search_enflasyon$enflasyon...Turkiye., type = "l",xlab = " ", ylab = " ", main = "Enflasyon Search")
+cor(all_data$EXC_RATE,search_enflasyon$enflasyon...Turkiye.)
+
+
+df_exc_rate=diff(all_data$EXC_RATE)
+df_search_enflasyon=diff(search_enflasyon$enflasyon...Turkiye.)
+plot(df_exc_rate,df_search_enflasyon)
+
+cor(df_exc_rate,df_search_enflasyon)
+
+
