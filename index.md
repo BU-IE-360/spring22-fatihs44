@@ -17,4 +17,4 @@ HW 0
 
 [PROJECT-HTML](https://bu-ie-360.github.io/spring22-fatihsahin/360%20Project%20Report.html)
 
-[PROJECT-CODE](https://github.com/BU-IE-360/spring22-fatihsahin/blob/gh-pages/360%20Project%20Report_code)
+[PROJECT-CODE](https://github.com/BU-IE-360/spring22-fatihsahin/blob/gh-pages/360%20Project%20Report.ipynb)
